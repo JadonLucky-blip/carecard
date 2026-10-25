@@ -25,8 +25,21 @@ never infer a warning sign or instruction that isn't explicitly stated.
 empty. Do not guess or fill in a plausible-sounding value.
 3. Every extracted item MUST include a "source" object with the exact page \
 number, the line number(s) it came from, and "quote": the exact substring \
-of that line (copy it character-for-character, don't paraphrase it).
+of that line (copy it character-for-character, don't paraphrase it). The \
+"quote" field is always the verbatim original text, never simplified.
 4. If you cannot find an exact source line for something, don't extract it.
+5. For "text" and "purpose" fields specifically (diagnosis, warning signs, \
+home care instructions, activity/diet limits, a medication's purpose): \
+rewrite them in plain language at about a 6th-grade reading level - short \
+sentences, everyday words instead of medical jargon, one idea per item. \
+Never change what it means or add anything not in the source - only \
+simplify how it's worded. A patient can always see the original exact \
+wording by tapping the item, via the "quote" field, so simplifying "text" \
+never loses information.
+6. Do NOT simplify name_as_written, dose, route, frequency_as_written, or \
+duration for medications - keep those exactly as written, since a separate \
+rule-based system parses them and needs the original abbreviations (e.g. \
+"BID", "PRN", "q6h") to work correctly.
 
 Call the record_discharge_card tool exactly once with everything you found."""
 
@@ -49,23 +62,32 @@ def _item_schema(extra_properties: dict, required_extra: list[str] | None = None
     }
 
 
+_PLAIN_LANGUAGE_DESC = (
+    "Plain-language rewrite at about a 6th-grade reading level (short "
+    "sentences, everyday words, same meaning) - NOT a verbatim quote. "
+    "The exact original wording belongs in this item's source.quote instead."
+)
+_AS_WRITTEN_DESC = "Keep exactly as written in the document - do not simplify or paraphrase."
+
 EXTRACTION_TOOL = {
     "name": "record_discharge_card",
     "description": "Records the structured discharge card extracted from the document.",
     "input_schema": {
         "type": "object",
         "properties": {
-            "diagnosis_plain": _item_schema({"text": {"type": "string"}}, ["text"]),
+            "diagnosis_plain": _item_schema(
+                {"text": {"type": "string", "description": _PLAIN_LANGUAGE_DESC}}, ["text"]
+            ),
             "medications": {
                 "type": "array",
                 "items": _item_schema(
                     {
-                        "name_as_written": {"type": "string"},
-                        "dose": {"type": "string"},
-                        "route": {"type": "string"},
-                        "frequency_as_written": {"type": "string"},
-                        "duration": {"type": "string"},
-                        "purpose": {"type": "string"},
+                        "name_as_written": {"type": "string", "description": _AS_WRITTEN_DESC},
+                        "dose": {"type": "string", "description": _AS_WRITTEN_DESC},
+                        "route": {"type": "string", "description": _AS_WRITTEN_DESC},
+                        "frequency_as_written": {"type": "string", "description": _AS_WRITTEN_DESC},
+                        "duration": {"type": "string", "description": _AS_WRITTEN_DESC},
+                        "purpose": {"type": "string", "description": _PLAIN_LANGUAGE_DESC},
                         "new_changed_or_stopped": {
                             "type": "string",
                             "enum": ["new", "changed", "stopped", "continue"],
@@ -78,7 +100,7 @@ EXTRACTION_TOOL = {
                 "type": "array",
                 "items": _item_schema(
                     {
-                        "text": {"type": "string"},
+                        "text": {"type": "string", "description": _PLAIN_LANGUAGE_DESC},
                         "urgency": {"type": "string", "enum": ["call_911", "go_to_ER", "call_doctor"]},
                     },
                     ["text", "urgency"],
@@ -88,19 +110,19 @@ EXTRACTION_TOOL = {
                 "type": "array",
                 "items": _item_schema(
                     {
-                        "with": {"type": "string"},
-                        "when": {"type": "string"},
-                        "phone": {"type": "string"},
+                        "with": {"type": "string", "description": _AS_WRITTEN_DESC},
+                        "when": {"type": "string", "description": _AS_WRITTEN_DESC},
+                        "phone": {"type": "string", "description": _AS_WRITTEN_DESC},
                     }
                 ),
             },
             "home_care_instructions": {
                 "type": "array",
-                "items": _item_schema({"text": {"type": "string"}}, ["text"]),
+                "items": _item_schema({"text": {"type": "string", "description": _PLAIN_LANGUAGE_DESC}}, ["text"]),
             },
             "activity_and_diet_limits": {
                 "type": "array",
-                "items": _item_schema({"text": {"type": "string"}}, ["text"]),
+                "items": _item_schema({"text": {"type": "string", "description": _PLAIN_LANGUAGE_DESC}}, ["text"]),
             },
         },
     },

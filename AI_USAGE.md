@@ -352,3 +352,32 @@ is meaningfully worse than on a typical linear discharge page. Tesseract
 reports per-word confidence scores that CareCard doesn't currently
 surface - using those to warn "this section may be misread" instead of
 presenting garbled text with full confidence is a reasonable 2.0 item.
+
+## Adding back the plain-language rewrite (component 7, partially)
+
+I raised a real concern: if the card's `text` fields just mirror the
+original document's wording, patients might skim past them the same way
+they skim the original paper packet - the exact problem CareCard exists
+to solve. This was in the original project spec as component 7 (rewrite
+at a 6th-grade reading level, original text always one tap away) and got
+cut for the 6-hour build. Claude pointed out the fix doesn't need new
+architecture: `source.quote` (used for grounding and for the tap-to-
+source photo highlight) and the displayed `text`/`purpose` fields were
+already separate things in the schema - grounding only ever checked
+`quote`, never `text`. So simplifying `text` doesn't touch grounding, the
+highlight-on-photo feature, or add any new API call.
+
+Implemented as a prompt change only, in `extract.py`: `text` and
+`purpose` fields (diagnosis, warning signs, home care, diet/activity
+limits, a medication's purpose) are now explicitly asked for in plain
+6th-grade language, with the rule that only wording may change, never
+meaning - `quote` stays verbatim as before. Medication `name_as_written`,
+`dose`, `route`, `frequency_as_written`, and `duration` are explicitly
+told NOT to be simplified, since the rule-based schedule parser
+(component 6) needs the original abbreviations like "BID" or "q6h" to
+work. Added matching `description` fields to the tool's JSON schema too,
+as a second reinforcement alongside the system prompt.
+
+Not yet tested against the real API as of this entry - prompt changes
+need a real call to verify, same constraint as everything else in this
+file that touches `extract.py`.
