@@ -123,12 +123,6 @@ def extract_card(redacted_transcript: str) -> ExtractedCard:
         system=SYSTEM_PROMPT,
         tools=[EXTRACTION_TOOL],
         tool_choice={"type": "tool", "name": "record_discharge_card"},
-        # This is a bounded structured-extraction task (not open-ended
-        # reasoning), and cost matters for this project - "medium" trims
-        # spend vs. the API default of "high" while still following the
-        # schema/instructions closely. Raise this back to "high" first if
-        # real extraction quality ever looks worse than expected.
-        output_config={"effort": "medium"},
         messages=[{"role": "user", "content": redacted_transcript}],
     )
 

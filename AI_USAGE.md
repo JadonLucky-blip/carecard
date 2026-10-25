@@ -133,10 +133,18 @@ leaving it untouched: raised `max_tokens` (4096 -> 8192, so a document
 with many medications/warnings can't get silently truncated mid-response),
 added explicit handling for `stop_reason == "refusal"` and `"max_tokens"`
 and for a missing tool-use block (previously these would have surfaced as
-an unhelpful generic error), and set `output_config.effort` to `"medium"`
-instead of the API default `"high"` given the explicit budget constraint
-on this project - noted as the first thing to raise back to `"high"` if
-real extraction quality ever looks worse than expected once tested.
+an unhelpful generic error).
+
+**Correction found on the first real API test**: this same pass had also
+added `output_config={"effort": "medium"}` as a cost optimization, but
+the installed `anthropic` SDK (0.42.0, pinned in requirements.txt)
+predates that parameter entirely - `messages.create()` raised
+`TypeError: unexpected keyword argument 'output_config'` immediately,
+before any network call was made (so this cost nothing to find). Removed
+it rather than risk upgrading the SDK untested with real money on the
+line. Good reminder that code written against current API docs still
+needs to be checked against the actually-pinned dependency version, not
+just assumed compatible.
 
 ## Written answers and demo video script
 
