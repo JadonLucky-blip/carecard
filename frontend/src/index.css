@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* Accessibility baseline: larger default text, high-contrast focus ring.
+   Specific component colors (warning red, etc.) are Tailwind classes,
+   chosen to never be the ONLY signal - always paired with an icon/label
+   too, for colorblind users. */
+html {
+  font-size: 18px;
+}
+
+body {
+  @apply text-gray-900 bg-gray-50;
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 2px;
+}
+
+@media print {
+  body {
+    background: white;
+  }
+  section {
+    break-inside: avoid;
+  }
+}

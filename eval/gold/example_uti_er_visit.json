@@ -1,0 +1,26 @@
+{
+  "diagnosis_plain": {"text": "Urinary tract infection (UTI)"},
+  "medications": [
+    {
+      "name_as_written": "Nitrofurantoin",
+      "dose": "100 mg",
+      "route": "PO",
+      "frequency_as_written": "BID",
+      "duration": "7 days",
+      "purpose": "bladder infection"
+    }
+  ],
+  "return_now_warning_signs": [
+    {"text": "Fever over 101.5 F", "urgency": "go_to_ER"},
+    {"text": "Severe back or side pain", "urgency": "go_to_ER"},
+    {"text": "Blood in your urine that does not go away", "urgency": "go_to_ER"}
+  ],
+  "follow_up_appointments": [
+    {"with": "Dr. Patel", "when": "in 1 week", "phone": "555-201-4488"}
+  ],
+  "home_care_instructions": [
+    {"text": "Drink plenty of water."},
+    {"text": "Finish all antibiotics even if you feel better."}
+  ],
+  "activity_and_diet_limits": []
+}

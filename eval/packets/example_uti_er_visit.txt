@@ -1,0 +1,28 @@
+# Template packet - fully synthetic, no real patient data.
+# Format: one line per OCR'd line, "[page P line L] text".
+# Write 1-2 more of these yourself (different visit type, maybe one
+# with messier/abbreviation-heavy phrasing) for the eval table.
+[page 1 line 1] MERCY GENERAL HOSPITAL - EMERGENCY DEPARTMENT
+[page 1 line 2] DISCHARGE INSTRUCTIONS
+[page 1 line 3] Patient: Jordan Rivera
+[page 1 line 4] DOB: 05/22/1990
+[page 1 line 5] MRN: 00482913
+[page 1 line 6] Date of visit: 03/14/2026
+[page 1 line 7]
+[page 1 line 8] DIAGNOSIS: Urinary tract infection (UTI)
+[page 1 line 9]
+[page 1 line 10] MEDICATIONS
+[page 1 line 11] Nitrofurantoin 100 mg tab PO BID x 7 days - take with food
+[page 1 line 12] For your bladder infection.
+[page 1 line 13]
+[page 1 line 14] RETURN TO THE ER OR CALL 911 IF YOU HAVE:
+[page 1 line 15] Fever over 101.5 F
+[page 1 line 16] Severe back or side pain
+[page 1 line 17] Blood in your urine that does not go away
+[page 1 line 18]
+[page 1 line 19] FOLLOW UP
+[page 1 line 20] See your primary care doctor, Dr. Patel, in 1 week. Call 555-201-4488 to schedule.
+[page 1 line 21]
+[page 1 line 22] HOME CARE
+[page 1 line 23] Drink plenty of water.
+[page 1 line 24] Finish all antibiotics even if you feel better.

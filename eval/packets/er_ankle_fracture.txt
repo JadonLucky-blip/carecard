@@ -1,0 +1,33 @@
+# Synthetic packet #3 - ER visit, abbreviation-heavy sigs (TID, q6h, two
+# different PRN meds with different max-per-day limits), tests the
+# "q6h PRN" combined-frequency case specifically.
+[page 1 line 1] COUNTY GENERAL HOSPITAL - EMERGENCY DEPARTMENT
+[page 1 line 2] Patient: Morgan Lee
+[page 1 line 3] DOB: 02/14/2003
+[page 1 line 4] MRN: 10029384
+[page 1 line 5] Date of visit: 10/20/2026
+[page 1 line 6]
+[page 1 line 7] DIAGNOSIS: Closed fracture, right ankle
+[page 1 line 8]
+[page 1 line 9] MEDICATIONS
+[page 1 line 10] Ibuprofen 600 mg tab PO TID x 5 days - take with food
+[page 1 line 11] For pain and swelling.
+[page 1 line 12] Cyclobenzaprine 5 mg tab PO q6h PRN muscle spasm, max 3 doses per day
+[page 1 line 13] Oxycodone 5 mg tab PO q6h PRN severe pain, max 4 doses per day
+[page 1 line 14] Only if ibuprofen is not enough.
+[page 1 line 15]
+[page 1 line 16] RETURN TO THE ER OR CALL 911 IF YOU HAVE:
+[page 1 line 17] Toes turning blue, cold, or numb
+[page 1 line 18] Severe pain not helped by medication
+[page 1 line 19] Fever over 101.5 F
+[page 1 line 20]
+[page 1 line 21] FOLLOW UP
+[page 1 line 22] See orthopedics, Dr. Nguyen, in 1 week. Call 555-330-7765 to schedule.
+[page 1 line 23]
+[page 1 line 24] HOME CARE
+[page 1 line 25] Keep your leg elevated above your heart when resting.
+[page 1 line 26] Use crutches - do not put weight on your right foot.
+[page 1 line 27]
+[page 1 line 28] ACTIVITY AND DIET LIMITS
+[page 1 line 29] No driving while taking opioid pain medication.
+[page 1 line 30] No showering with the splint on - keep it dry.

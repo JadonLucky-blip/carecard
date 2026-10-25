@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Node / frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local Claude Code tooling config (machine-specific, not project config)
+.claude/settings.local.json
+
+# Scratch files used only for interactive browser testing during dev
+eval/sample_photos/_cors_server.py

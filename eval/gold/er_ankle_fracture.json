@@ -1,0 +1,45 @@
+{
+  "diagnosis_plain": {"text": "Closed fracture, right ankle"},
+  "medications": [
+    {
+      "name_as_written": "Ibuprofen",
+      "dose": "600 mg",
+      "route": "PO",
+      "frequency_as_written": "TID",
+      "duration": "5 days",
+      "purpose": "pain and swelling"
+    },
+    {
+      "name_as_written": "Cyclobenzaprine",
+      "dose": "5 mg",
+      "route": "PO",
+      "frequency_as_written": "q6h PRN",
+      "duration": "",
+      "purpose": ""
+    },
+    {
+      "name_as_written": "Oxycodone",
+      "dose": "5 mg",
+      "route": "PO",
+      "frequency_as_written": "q6h PRN",
+      "duration": "",
+      "purpose": "Only if ibuprofen is not enough"
+    }
+  ],
+  "return_now_warning_signs": [
+    {"text": "Toes turning blue, cold, or numb", "urgency": "go_to_ER"},
+    {"text": "Severe pain not helped by medication", "urgency": "go_to_ER"},
+    {"text": "Fever over 101.5 F", "urgency": "go_to_ER"}
+  ],
+  "follow_up_appointments": [
+    {"with": "Dr. Nguyen", "when": "in 1 week", "phone": "555-330-7765"}
+  ],
+  "home_care_instructions": [
+    {"text": "Keep your leg elevated above your heart when resting."},
+    {"text": "Use crutches - do not put weight on your right foot."}
+  ],
+  "activity_and_diet_limits": [
+    {"text": "No driving while taking opioid pain medication."},
+    {"text": "No showering with the splint on - keep it dry."}
+  ]
+}

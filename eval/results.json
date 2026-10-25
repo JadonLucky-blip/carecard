@@ -1,0 +1,236 @@
+[
+  {
+    "packet": "er_ankle_fracture",
+    "grounding_score": 100.0,
+    "medications": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 3,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "return_now_warning_signs": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 3,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "follow_up_appointments": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 1,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "home_care_instructions": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 2,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "activity_and_diet_limits": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 2,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "schedules": [
+      {
+        "medication_index": 0,
+        "times_of_day": [
+          "08:00",
+          "14:00",
+          "20:00"
+        ],
+        "start_date": "2026-10-25",
+        "end_date": "2026-10-29",
+        "as_needed": false,
+        "max_per_day": null,
+        "with_food": false,
+        "unparsed": false,
+        "generic_name": null,
+        "brand_name": null
+      },
+      {
+        "medication_index": 1,
+        "times_of_day": [],
+        "start_date": null,
+        "end_date": null,
+        "as_needed": true,
+        "max_per_day": null,
+        "with_food": false,
+        "unparsed": false,
+        "generic_name": null,
+        "brand_name": null
+      },
+      {
+        "medication_index": 2,
+        "times_of_day": [],
+        "start_date": null,
+        "end_date": null,
+        "as_needed": true,
+        "max_per_day": null,
+        "with_food": false,
+        "unparsed": false,
+        "generic_name": null,
+        "brand_name": null
+      }
+    ]
+  },
+  {
+    "packet": "example_uti_er_visit",
+    "grounding_score": 100.0,
+    "medications": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 1,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "return_now_warning_signs": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 3,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "follow_up_appointments": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 1,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "home_care_instructions": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 2,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "activity_and_diet_limits": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 0,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "schedules": [
+      {
+        "medication_index": 0,
+        "times_of_day": [
+          "08:00",
+          "20:00"
+        ],
+        "start_date": "2026-10-25",
+        "end_date": "2026-10-31",
+        "as_needed": false,
+        "max_per_day": null,
+        "with_food": false,
+        "unparsed": false,
+        "generic_name": null,
+        "brand_name": null
+      }
+    ]
+  },
+  {
+    "packet": "hospital_chf_admission",
+    "grounding_score": 100.0,
+    "medications": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 3,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "return_now_warning_signs": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 3,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "follow_up_appointments": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 1,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "home_care_instructions": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 2,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "activity_and_diet_limits": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "hallucination_rate": 0.0,
+      "true_pos": 2,
+      "false_pos": 0,
+      "false_neg": 0
+    },
+    "schedules": [
+      {
+        "medication_index": 0,
+        "times_of_day": [
+          "08:00"
+        ],
+        "start_date": "2026-10-25",
+        "end_date": "2026-11-07",
+        "as_needed": false,
+        "max_per_day": null,
+        "with_food": false,
+        "unparsed": false,
+        "generic_name": null,
+        "brand_name": null
+      },
+      {
+        "medication_index": 1,
+        "times_of_day": [
+          "08:00",
+          "20:00"
+        ],
+        "start_date": null,
+        "end_date": null,
+        "as_needed": false,
+        "max_per_day": null,
+        "with_food": false,
+        "unparsed": false,
+        "generic_name": null,
+        "brand_name": null
+      },
+      {
+        "medication_index": 2,
+        "times_of_day": [],
+        "start_date": null,
+        "end_date": null,
+        "as_needed": true,
+        "max_per_day": null,
+        "with_food": false,
+        "unparsed": false,
+        "generic_name": null,
+        "brand_name": null
+      }
+    ]
+  }
+]

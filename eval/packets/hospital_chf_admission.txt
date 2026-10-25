@@ -1,0 +1,34 @@
+# Synthetic packet #2 - hospital inpatient stay (not an ER visit), more
+# abbreviations, a PRN medication with a max-per-day limit, and an
+# activity/diet limits section (the first packet's was empty).
+[page 1 line 1] RIVERSIDE MEDICAL CENTER - INPATIENT DISCHARGE SUMMARY
+[page 1 line 2] Patient: Alex Chen
+[page 1 line 3] DOB: 11/03/1958
+[page 1 line 4] MRN: 77213490
+[page 1 line 5] Admit date: 10/18/2026 Discharge date: 10/24/2026
+[page 1 line 6]
+[page 1 line 7] DIAGNOSIS: Congestive heart failure (CHF) exacerbation
+[page 1 line 8]
+[page 1 line 9] MEDICATIONS
+[page 1 line 10] Furosemide 40 mg tab PO QD x 14 days
+[page 1 line 11] Water pill to reduce fluid buildup.
+[page 1 line 12] Metoprolol 25 mg tab PO BID
+[page 1 line 13] Controls heart rate and blood pressure.
+[page 1 line 14] Oxycodone 5 mg tab PO PRN pain, max 4 doses per day
+[page 1 line 15] For incision pain only.
+[page 1 line 16]
+[page 1 line 17] RETURN TO THE ER OR CALL 911 IF YOU HAVE:
+[page 1 line 18] Chest pain or trouble breathing - call 911 immediately
+[page 1 line 19] Weight gain of more than 3 pounds in one day
+[page 1 line 20] Swelling in your legs or feet that is getting worse
+[page 1 line 21]
+[page 1 line 22] FOLLOW UP
+[page 1 line 23] See Dr. Chen in 2 weeks. Call 555-884-2210 to schedule.
+[page 1 line 24]
+[page 1 line 25] HOME CARE
+[page 1 line 26] Weigh yourself every morning before breakfast.
+[page 1 line 27] Call your doctor if you gain weight suddenly.
+[page 1 line 28]
+[page 1 line 29] ACTIVITY AND DIET LIMITS
+[page 1 line 30] No heavy lifting over 10 pounds for 2 weeks.
+[page 1 line 31] Low-sodium diet, less than 2 grams of salt a day.

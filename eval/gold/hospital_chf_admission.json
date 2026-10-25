@@ -1,0 +1,45 @@
+{
+  "diagnosis_plain": {"text": "Congestive heart failure (CHF) exacerbation"},
+  "medications": [
+    {
+      "name_as_written": "Furosemide",
+      "dose": "40 mg",
+      "route": "PO",
+      "frequency_as_written": "QD",
+      "duration": "14 days",
+      "purpose": "Water pill to reduce fluid buildup"
+    },
+    {
+      "name_as_written": "Metoprolol",
+      "dose": "25 mg",
+      "route": "PO",
+      "frequency_as_written": "BID",
+      "duration": "",
+      "purpose": "Controls heart rate and blood pressure"
+    },
+    {
+      "name_as_written": "Oxycodone",
+      "dose": "5 mg",
+      "route": "PO",
+      "frequency_as_written": "PRN",
+      "duration": "",
+      "purpose": "incision pain only"
+    }
+  ],
+  "return_now_warning_signs": [
+    {"text": "Chest pain or trouble breathing - call 911 immediately", "urgency": "call_911"},
+    {"text": "Weight gain of more than 3 pounds in one day", "urgency": "go_to_ER"},
+    {"text": "Swelling in your legs or feet that is getting worse", "urgency": "go_to_ER"}
+  ],
+  "follow_up_appointments": [
+    {"with": "Dr. Chen", "when": "in 2 weeks", "phone": "555-884-2210"}
+  ],
+  "home_care_instructions": [
+    {"text": "Weigh yourself every morning before breakfast."},
+    {"text": "Call your doctor if you gain weight suddenly."}
+  ],
+  "activity_and_diet_limits": [
+    {"text": "No heavy lifting over 10 pounds for 2 weeks."},
+    {"text": "Low-sodium diet, less than 2 grams of salt a day."}
+  ]
+}
