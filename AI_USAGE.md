@@ -146,6 +146,20 @@ line. Good reminder that code written against current API docs still
 needs to be checked against the actually-pinned dependency version, not
 just assumed compatible.
 
+**Second issue found on the next real API test, more serious**: the
+request didn't fail with an API error - it got routed to the wrong
+server entirely. The response body was openrouter.ai's website HTML, not
+anything from Anthropic. This machine has an `ANTHROPIC_BASE_URL`
+environment variable set (from some other tool/project, unrelated to
+CareCard) pointing at a third-party proxy, and since the backend never
+pinned its own `base_url`, the Anthropic SDK picked up that ambient
+setting instead of defaulting to the real API. Fixed by passing
+`base_url="https://api.anthropic.com"` explicitly in `extract.py` so
+CareCard's behavior doesn't depend on whatever else happens to be
+configured on the machine it runs on. No Anthropic API cost was incurred
+by either failed attempt - neither one actually reached Anthropic's
+servers.
+
 ## Written answers and demo video script
 
 `WRITTEN_ANSWERS.md` and `DEMO_VIDEO_SCRIPT.md` are Claude-written drafts,

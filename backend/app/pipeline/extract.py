@@ -112,7 +112,13 @@ _client: anthropic.Anthropic | None = None
 def _get_client() -> anthropic.Anthropic:
     global _client
     if _client is None:
-        _client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+        # base_url is pinned explicitly, on purpose: the Anthropic SDK
+        # reads ANTHROPIC_BASE_URL from the environment if present, and
+        # this dev machine has some other tool configured with that env
+        # var pointing at a third-party proxy (discovered while testing -
+        # see AI_USAGE.md). Without this, requests meant for the real
+        # Claude API could silently go somewhere else entirely.
+        _client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY, base_url="https://api.anthropic.com")
     return _client
 
 
