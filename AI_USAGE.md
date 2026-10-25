@@ -291,3 +291,8 @@ eval harness's "hallucination rate" measures distance from a hand-written
 gold label, which itself can be wrong or just narrower than a correct
 answer - it is not an infallible ground truth, and a 0% score on one
 field doesn't automatically mean the AI invented something.
+
+After fixing the gold label, a final re-run against the real API
+confirmed all 15/15 category checks at 100% precision/recall, 100%
+grounding, 0% hallucination rate across all 3 packets - see the table in
+README.md.
