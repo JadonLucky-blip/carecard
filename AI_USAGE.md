@@ -125,6 +125,19 @@ rendered before the red warning banner - a real violation of the spec's
 "warning section always comes first" requirement, not just a style
 preference - and fixed the ordering.
 
+## Hardening extract.py before its first real run
+
+Since `extract.py` is the one component that genuinely can't be tested
+without spending money, Claude gave it a closer review rather than
+leaving it untouched: raised `max_tokens` (4096 -> 8192, so a document
+with many medications/warnings can't get silently truncated mid-response),
+added explicit handling for `stop_reason == "refusal"` and `"max_tokens"`
+and for a missing tool-use block (previously these would have surfaced as
+an unhelpful generic error), and set `output_config.effort` to `"medium"`
+instead of the API default `"high"` given the explicit budget constraint
+on this project - noted as the first thing to raise back to `"high"` if
+real extraction quality ever looks worse than expected once tested.
+
 ## Written answers and demo video script
 
 `WRITTEN_ANSWERS.md` and `DEMO_VIDEO_SCRIPT.md` are Claude-written drafts,

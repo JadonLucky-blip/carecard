@@ -119,11 +119,26 @@ def _get_client() -> anthropic.Anthropic:
 def extract_card(redacted_transcript: str) -> ExtractedCard:
     response = _get_client().messages.create(
         model=ANTHROPIC_MODEL,
-        max_tokens=4096,
+        max_tokens=8192,
         system=SYSTEM_PROMPT,
         tools=[EXTRACTION_TOOL],
         tool_choice={"type": "tool", "name": "record_discharge_card"},
+        # This is a bounded structured-extraction task (not open-ended
+        # reasoning), and cost matters for this project - "medium" trims
+        # spend vs. the API default of "high" while still following the
+        # schema/instructions closely. Raise this back to "high" first if
+        # real extraction quality ever looks worse than expected.
+        output_config={"effort": "medium"},
         messages=[{"role": "user", "content": redacted_transcript}],
     )
-    tool_use = next(block for block in response.content if block.type == "tool_use")
+
+    if response.stop_reason == "refusal":
+        raise RuntimeError("Claude declined to process this document.")
+    if response.stop_reason == "max_tokens":
+        raise RuntimeError("Claude's response was cut off (too long) - try fewer or shorter photos.")
+
+    tool_use = next((block for block in response.content if block.type == "tool_use"), None)
+    if tool_use is None:
+        raise RuntimeError("Claude didn't return structured data - please try again.")
+
     return ExtractedCard.model_validate(tool_use.input)
