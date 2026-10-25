@@ -250,5 +250,44 @@ admission, and an ER ankle fracture with abbreviation-heavy, two-PRN-drug
 sigs) each score 100% precision/recall on every field and 100% grounding
 using the mock. That's expected for clean synthetic packets matching the
 mock's assumptions - it demonstrates the harness and pipeline wiring work
-correctly, not real-world Claude extraction quality, which still needs
-the real API to measure honestly.
+correctly, not real-world Claude extraction quality.
+
+## Real Claude API results
+
+After setting a real `ANTHROPIC_API_KEY`, two more real bugs turned up
+immediately (both caught before any API cost, since both failed locally):
+
+- `output_config={"effort": "medium"}` (added as a cost optimization)
+  isn't supported by the pinned `anthropic` SDK version (0.42.0) -
+  `TypeError` on the first call. Removed it.
+- The second attempt returned **openrouter.ai's website HTML**, not an
+  Anthropic response - this machine has an `ANTHROPIC_BASE_URL` env var
+  set by some other, unrelated tool, pointing at a third-party proxy, and
+  the SDK picked that up since our code never pinned its own base URL.
+  Fixed by passing `base_url="https://api.anthropic.com"` explicitly in
+  `extract.py`, so CareCard's behavior doesn't depend on whatever else is
+  configured on the machine running it.
+
+With both fixed, real Claude extraction worked, including a case that
+shows *why* the "nothing is invented" + grounding design matters: for one
+packet, the real model combined two separate OCR lines (a medication's
+sig line and its purpose line on the line below) into a single accurate
+citation spanning both - something the crude mock could never do, since
+it only ever reads one line at a time.
+
+Running the full eval harness against the real API (3 packets, ~$0.03
+total) scored 14 of 15 category checks at 100% precision/recall. The one
+exception (`er_ankle_fracture`'s follow-up appointment) looked at first
+like a real miss - 0% precision, 100% "hallucination rate" - but turned
+out to be **a gold-label bug, not an extraction bug**: Claude correctly
+extracted `"orthopedics, Dr. Nguyen"` (the source line literally reads
+"See orthopedics, Dr. Nguyen..."), which is more complete than my gold
+file's narrower `"Dr. Nguyen"`, and didn't fuzzy-match closely enough to
+count. Confirmed via a small debug script
+(`eval/_debug_appt.py`) that printed the raw extracted value before
+fixing the gold label - rather than assuming the discrepancy was Claude's
+fault. This is worth being able to explain to a judge directly: this
+eval harness's "hallucination rate" measures distance from a hand-written
+gold label, which itself can be wrong or just narrower than a correct
+answer - it is not an infallible ground truth, and a 0% score on one
+field doesn't automatically mean the AI invented something.

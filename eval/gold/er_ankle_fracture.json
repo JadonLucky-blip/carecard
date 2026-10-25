@@ -32,7 +32,7 @@
     {"text": "Fever over 101.5 F", "urgency": "go_to_ER"}
   ],
   "follow_up_appointments": [
-    {"with": "Dr. Nguyen", "when": "in 1 week", "phone": "555-330-7765"}
+    {"with": "orthopedics, Dr. Nguyen", "when": "in 1 week", "phone": "555-330-7765"}
   ],
   "home_care_instructions": [
     {"text": "Keep your leg elevated above your heart when resting."},
