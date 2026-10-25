@@ -80,12 +80,21 @@ export function SourceHighlight({ source, pages, photoUrls, onClose }: SourceHig
             <img src={photoUrl} alt={`Page ${source.page} of your discharge papers`} className="w-full rounded border" />
             {box && page && page.width > 0 && (
               <div
-                className="absolute rounded-sm border-4 border-yellow-400 bg-yellow-300/30"
+                className="absolute rounded-sm border-2 border-yellow-500"
                 style={{
                   left: `${(box.x / page.width) * 100}%`,
                   top: `${(box.y / page.height) * 100}%`,
                   width: `${(box.width / page.width) * 100}%`,
                   height: `${(box.height / page.height) * 100}%`,
+                  // A flat semi-transparent fill was washing out and
+                  // obstructing the text underneath it, especially on
+                  // dense documents. mix-blend-mode: multiply makes this
+                  // behave like an actual highlighter pen instead - it
+                  // tints the background yellow without ever making dark
+                  // text harder to read (multiply only darkens, so text
+                  // that was already dark stays dark).
+                  backgroundColor: 'rgba(250, 204, 21, 0.55)',
+                  mixBlendMode: 'multiply',
                 }}
               />
             )}

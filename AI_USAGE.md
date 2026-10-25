@@ -296,3 +296,59 @@ After fixing the gold label, a final re-run against the real API
 confirmed all 15/15 category checks at 100% precision/recall, 100%
 grounding, 0% hallucination rate across all 3 packets - see the table in
 README.md.
+
+## Testing with real-world photos, and a lesson about trusting a critique
+
+I tested CareCard against two real, non-synthetic documents beyond the
+eval packets: a generic patient-education handout about ankle sprains,
+and (apparently by mistake) a screenshot from an academic paper about
+clinical medication-extraction NLP, with highlighted terms and redacted
+IDs. I also ran CareCard's output through a separate AI tool asking it to
+critique the extraction, and brought that critique back to Claude to act
+on.
+
+Claude checked the critique against the actual source images before
+acting on it, rather than trusting it at face value, and found it was
+wrong in two significant ways:
+
+- It called several home-care instructions "hallucinated" (e.g. "Avoid
+  HARM - Heat, Alcohol, Running/sport and Massage") that are actually
+  quoted verbatim from the real document. CareCard was right; the
+  critique was wrong.
+- For the second test, it fabricated an entire fictional "migraine"
+  reference document - specific drug names, dosages, a full expected
+  output - that has nothing to do with the actual image, which was the
+  academic-paper screenshot (about a cerebral-bleed/encephalopathy case,
+  not a migraine). CareCard's garbled output on that image was a real
+  OCR failure on a genuinely hard, non-standard layout (dense multi-
+  column text, colored highlight boxes, redacted ID placeholders) - not
+  the "confidently inventing medication names" problem the critique
+  described.
+
+This is worth including in a judge conversation: a second AI tool,
+asked to evaluate an extraction without being given the real source
+document, produced a confident, well-formatted, and partly fabricated
+critique - which is exactly the failure mode CareCard's own grounding
+step exists to prevent. Not independently checking it before acting
+would have meant "fixing" correct behavior and chasing a bug that didn't
+exist, based on fabricated claims about a document that was never there.
+
+**What was genuinely real from that testing round, and fixed:**
+
+- **Highlight box obstructing text** (`SourceHighlight.tsx`): the
+  highlighted region used a flat semi-transparent fill, which washed out
+  and obscured the text underneath on dense documents. Switched to
+  `mix-blend-mode: multiply`, the standard "highlighter pen" CSS
+  technique - it tints the background yellow without ever making already-
+  dark text harder to read.
+- **No empty-state message for medications** (`MedsChecklist.tsx`): the
+  warning-signs section already said "Your papers don't list warning
+  signs" when empty; medications just silently showed nothing. Added
+  "No medications are listed in your papers." for consistency.
+
+**Genuinely unresolved, not a quick fix**: OCR quality on complex,
+non-standard layouts (multi-column academic figures, dense highlighting)
+is meaningfully worse than on a typical linear discharge page. Tesseract
+reports per-word confidence scores that CareCard doesn't currently
+surface - using those to warn "this section may be misread" instead of
+presenting garbled text with full confidence is a reasonable 2.0 item.

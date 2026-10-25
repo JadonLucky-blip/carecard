@@ -67,6 +67,10 @@ export function MedsChecklist({ medications, schedules, onShowSource }: MedsChec
         Today's medicines
       </h2>
 
+      {medications.length === 0 && (
+        <p className="mt-1 text-gray-600">No medications are listed in your papers.</p>
+      )}
+
       {BUCKET_LABELS.map(
         ([key, label]) =>
           buckets[key].length > 0 && (
