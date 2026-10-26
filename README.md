@@ -68,30 +68,53 @@ eval/
 
 ## Running it locally
 
+```bash
+git clone https://github.com/JadonLucky-blip/carecard.git
+cd carecard
+```
+
+**Python version matters**: use Python 3.11-3.13. Python 3.14 is too new
+for several dependencies (rapidfuzz, opencv) to have prebuilt wheels yet
+as of this writing - `pip install` will fail trying to compile them from
+source. Check with `python --version` first; if you're on 3.14, install
+3.13 from python.org or via your package manager and use that instead
+(e.g. `py -3.13 -m venv .venv` on Windows).
+
 **Backend:**
 
 ```bash
 cd backend
 python -m venv .venv
-.venv\Scripts\activate       # or: source .venv/bin/activate
+.venv\Scripts\activate       # Windows; on macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
 Tesseract's binary also needs to be installed separately (not pip-
-installable) - on Windows: `winget install UB-Mannheim.TesseractOCR`.
+installable):
+- Windows: `winget install UB-Mannheim.TesseractOCR`
+- macOS: `brew install tesseract`
+- Linux (Debian/Ubuntu): `sudo apt install tesseract-ocr`
 
-Set your Claude API key (never commit this):
+Set **your own** Claude API key (get one at console.anthropic.com - never
+commit this, and never use someone else's key):
 
 ```bash
 set ANTHROPIC_API_KEY=sk-ant-...        # Windows cmd
 $env:ANTHROPIC_API_KEY = "sk-ant-..."   # PowerShell
+export ANTHROPIC_API_KEY=sk-ant-...     # macOS/Linux
 ```
+
+Real extraction costs about $0.01-0.02 per discharge photo (Sonnet 5).
 
 Then run the server:
 
 ```bash
-python -m uvicorn app.main:app --reload --port 8000
+python -m uvicorn app.main:app --port 8000
 ```
+
+(Deliberately no `--reload` flag - we found it unreliable during
+development, occasionally serving stale code silently after a file
+change. Restart the process manually after editing backend files.)
 
 **Frontend:**
 
